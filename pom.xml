@@ -3,10 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <visrec.version>1.0-SNAPSHOT</visrec.version>
+        <jdk.version>1.8</jdk.version>
+        <testng.version>6.14.3</testng.version>
+        <testaudit.version>1.1.4.Final</testaudit.version>
+    </properties>
 
     <groupId>javax.visrec</groupId>
     <artifactId>jsr381-tck</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${visrec.version}</version>
 
     <dependencies>
 
@@ -21,15 +40,17 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <scope>compile</scope>
+            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.test-audit</groupId>
             <artifactId>jboss-test-audit-api</artifactId>
+            <version>${testaudit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.test-audit</groupId>
             <artifactId>jboss-test-audit-impl</artifactId>
+            <version>${testaudit.version}</version>
         </dependency>
     </dependencies>
 
@@ -78,5 +99,55 @@
             <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>audit</id>
+            <activation>
+                <property>
+                    <name>createTCKReport</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.bsc.maven</groupId>
+                            <artifactId>maven-processor-plugin</artifactId>
+                            <version>2.0.7</version>
+                            <configuration>
+                                <defaultOutputDirectory>${basedir}/target/coverage-report</defaultOutputDirectory>
+                                <processors>
+                                    <processor>org.jboss.test.audit.report.CoverageProcessor</processor>
+                                </processors>
+                                <outputClassDirectory>${basedir}/target/classes</outputClassDirectory>
+                                <compilerArguments>
+                                    -AauditXml=${basedir}/test-audit.xml -AoutputDir=${basedir}/target/coverage-report
+                                    -source ${jdk.version} -target ${jdk.version}
+                                </compilerArguments>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>process</id>
+                                    <phase>generate-sources</phase>
+                                    <goals>
+                                        <goal>process-test</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.bsc.maven</groupId>
+                        <artifactId>maven-processor-plugin</artifactId>
+                        <version>2.0.7</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
