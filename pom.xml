@@ -8,6 +8,75 @@
     <artifactId>jsr381-tck</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
 
+        <!-- visrec-api dependency -->
+        <dependency>
+            <groupId>javax.visrec</groupId>
+            <artifactId>visrec-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Test and auditing dependencies -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-impl</artifactId>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+
+        <!--
+        Added because the API is not published as release. To be removed/disabled once
+        the API is publicly available
+        -->
+        <repository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+
+        <!-- Other repo's -->
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-release</id>
+            <name>libs-release</name>
+            <url>http://oss.jfrog.org/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>bintray-snapshot</id>
+            <name>libs-snapshot</name>
+            <url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+        </repository>
+        <repository>
+            <id>jboss-maven2-brew</id>
+            <name>JBoss Maven 2 Brew Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>jboss-maven2-snapshots</id>
+            <name>JBoss Maven 2 Brew Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 
 </project>
