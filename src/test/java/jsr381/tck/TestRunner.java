@@ -11,7 +11,7 @@ public class TestRunner {
 
     @Test
     public void run() {
-        Tool runner = new TCKRunner();
+        final Tool runner = new TCKRunner();
         runner.run(System.in, System.out, System.err, new String[0]);
     }
 }

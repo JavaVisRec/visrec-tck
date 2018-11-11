@@ -1,5 +1,6 @@
 package jsr381.tck;
 
+import jsr381.tck.tests.spi.ServiceProviderTest;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
@@ -33,18 +34,7 @@ public final class TCKRunner extends XmlSuite implements Tool {
         XmlTest test = new XmlTest(this);
         test.setName("TCK/Test Setup");
         List<XmlClass> classes = new ArrayList<>();
-//        classes.add(new XmlClass(TCKTestSetup.class));
-//        classes.add(new XmlClass(ModellingCurrenciesTest.class));
-//        classes.add(new XmlClass(ModellingMonetaryAmountsTest.class));
-//        classes.add(new XmlClass(CreatingMonetaryAmountsTest.class));
-//        classes.add(new XmlClass(ExternalizingNumericValueTest.class));
-//        classes.add(new XmlClass(FunctionalExtensionPointsTest.class));
-//        classes.add(new XmlClass(AccessingCurrenciesAmountsRoundingsTest.class));
-//        classes.add(new XmlClass(MonetaryConversionsTest.class));
-//        classes.add(new XmlClass(ExchangeRatesAndRateProvidersTest.class));
-//        classes.add(new XmlClass(ConvertingAmountsTest.class));
-//        classes.add(new XmlClass(ProviderChainsTest.class));
-//        classes.add(new XmlClass(FormattingMonetaryAmountsTest.class));
+        classes.add(new XmlClass(ServiceProviderTest.class));
         test.setXmlClasses(classes);
     }
 
