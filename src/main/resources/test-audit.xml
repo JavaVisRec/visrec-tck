@@ -32,7 +32,7 @@
     <section id="4.1.1" title="Package Overview"/>
     <section id="4.1.2" title="Module/Repository Overview"/>
     <section id="4.2" title="Visual Recognition Core API"/>
-    <section id="4.2.1" title="Service Provider usability">
+    <section id="4.2.1" title="Service Provider Usability">
         <group>
             <text>A. Accessing the Service Provider</text>
             <assertion id="421-A1">
@@ -51,6 +51,20 @@
                 <text>Obtain the implementation of ImageFactoryService through the Service Provider</text>
             </assertion>
         </group>
+    </section>
+    <section id="4.2.2" title="Creation and Usage of the Classifier">
+        <group>
+            <text>A. Usage of the Classifier Service</text>
+            <assertion id="422-A1">
+                <text>Obtain the classifier with default supported source type (BufferedImage)
+                    and default supported result type (String)</text>
+            </assertion>
+            <assertion id="422-A2">
+                <text>Bad case: if the classifier could not be found by source and result type, it should
+                throw a specific exception: ClassifierNotFoundException</text>
+            </assertion>
+        </group>
+
     </section>
     <!--<section id="4.2.1" title="Modelling of Currencies">-->
         <!--&lt;!&ndash; Tests class ModellingCurrenciesTest &ndash;&gt;-->
