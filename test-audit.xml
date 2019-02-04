@@ -50,6 +50,9 @@
             <assertion id="421-B3">
                 <text>Obtain the implementation of ImageFactoryService through the Service Provider</text>
             </assertion>
+            <assertion id="421-B4">
+                <text>Obtain the implementation of ImplementationService through the Service Provider</text>
+            </assertion>
         </group>
     </section>
     <section id="4.2.2" title="Creation and Usage of the Classifier">

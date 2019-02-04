@@ -4,10 +4,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import javax.visrec.spi.BuilderService;
-import javax.visrec.spi.ClassifierService;
-import javax.visrec.spi.ImageFactoryService;
-import javax.visrec.spi.ServiceProvider;
+import javax.visrec.spi.*;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
@@ -66,11 +63,26 @@ public class ServiceProviderTest {
      * Obtain the ImageFactoryService from the service provider
      */
     @Test(description = "4.2.1 Obtain the implementation of ImageFactoryService through the Service Provider.")
-    @SpecAssertion(section = "4.2.1", id = "421-B3")
+    @SpecAssertion(section = "4.2.1", id = "421-B4")
     public void testGetImageFactoryService() {
         try {
             final ServiceProvider serviceProvider = ServiceProvider.current();
             final ImageFactoryService service = serviceProvider.getImageFactoryService();
+            assertNotNull(service);
+        } catch (IllegalStateException | UnsupportedOperationException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Obtain the ImplementationService from the service provider
+     */
+    @Test(description = "4.2.1 Obtain the implementation of ImplementationService through the Service Provider.")
+    @SpecAssertion(section = "4.2.1", id = "421-B3")
+    public void testGetImplementationService() {
+        try {
+            final ServiceProvider serviceProvider = ServiceProvider.current();
+            final ImplementationService service = serviceProvider.getImplementationService();
             assertNotNull(service);
         } catch (IllegalStateException | UnsupportedOperationException e) {
             fail(e.getMessage());
