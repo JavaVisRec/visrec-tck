@@ -42,7 +42,7 @@
         <group>
             <text>B. Obtain Services from the Service Provider</text>
             <assertion id="421-B1">
-                <text>Obtain the implementation of BuilderService through the Service Provider</text>
+                <text>(Deprecated) Obtain the implementation of BuilderService through the Service Provider</text>
             </assertion>
             <assertion id="421-B2">
                 <text>Obtain the implementation of ClassifierService through the Service Provider</text>
@@ -54,21 +54,131 @@
                 <text>Obtain the implementation of ImplementationService through the Service Provider</text>
             </assertion>
         </group>
-    </section>
-    <section id="4.2.2" title="Creation and Usage of the Classifier">
         <group>
-            <text>A. Usage of the Classifier Service</text>
-            <assertion id="422-A1">
-                <text>Obtain the classifier with default supported source type (BufferedImage)
-                    and default supported result type (String)</text>
+            <text>C. BuilderService (deprecated)</text>
+        </group>
+        <group>
+            <text>D. ClassifierService</text>
+            <assertion id="421-D1">
+                <text>Must use the ImageClassifier.BuildingBlock to return an implemented and trained classification model as ImageClassifier.</text>
             </assertion>
-            <assertion id="422-A2">
-                <text>Bad case: if the classifier could not be found by source and result type, it should
-                throw a specific exception: ClassifierNotFoundException</text>
+            <assertion id="421-D1">
+                <text>Must use the BinaryClassifier.BuildingBlock to return an implemented and trained classification model as BinaryClassifier.</text>
             </assertion>
         </group>
-
+        <group>
+            <text>E. ImageFactoryService</text>
+            <assertion id="421-E1">
+                <text>Must be able to return an Optional after calling getByImageType(...)</text>
+            </assertion>
+            <assertion id="421-E2">
+                <text>Must be able to return an implementation of the ImageFactory that is able to handle type of BufferedImage.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>F. ImplementationService</text>
+            <assertion id="421-F1">
+                <text>Must be able to return the name of the implementation which may not be empty nor null.</text>
+            </assertion>
+            <assertion id="421-F2">
+                <text>Must be able to return the version of the implementation which may not be empty nor null.</text>
+            </assertion>
+        </group>
     </section>
+    <section id="4.2.2" title="Classification"/>
+    <section id="4.2.2.1" title="Creation and Usage of the ImageClassifier">
+        <group>
+            <text>A. Building the ImageClassifier</text>
+            <assertion id="4221-A1">
+                <text>Create an ImageClassifier using the building blocks in the builder design pattern.</text>
+            </assertion>
+            <assertion id="4221-A2">
+                <text>Create an ImageClassifier using a Map of configuration key-value which reflect to the methods
+                of the building blocks.</text>
+            </assertion>
+            <assertion id="4221-A3">
+                <text>Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid keys.</text>
+            </assertion>
+            <assertion id="4221-A4">
+                <text>Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid value types
+                    corresponding to the key. It must throw a ClassifierCreationException.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>B. Using the ImageClassifier</text>
+            <assertion id="4221-B1">
+                <text>Use a created ImageClassifier to classify MNIST and verify the output formation (not the accuracy). The key must
+                be the label and the value must be the float of accuracy.</text>
+            </assertion>
+            <assertion id="4221-B2">
+                <text>Classify input using a File object as input for the ImageClassifier.</text>
+            </assertion>
+            <assertion id="4221-B3">
+                <text>Classify input using a InputStream object as input for the ImageClassifier.</text>
+            </assertion>
+            <assertion id="4221-B4">
+                <text>Classify input using a BufferedImage object as input for the ImageClassifier.</text>
+            </assertion>
+            <assertion id="4221-B5">
+                <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input.
+                It must throw a ClassificationException.</text>
+            </assertion>
+            <assertion id="4221-B6">
+                <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input.
+                    It must throw a ClassificationException.</text>
+            </assertion>
+        </group>
+    </section>
+    <section id="4.2.2.2" title="Creation and Usage of the BinaryClassifier">
+        <group>
+            <text>A. Building the BinaryClassifier</text>
+            <assertion id="4222-A1">
+                <text>Create a BinaryClassifier using the building blocks in the builder design pattern.</text>
+            </assertion>
+            <assertion id="4222-A2">
+                <text>Create a BinaryClassifier using a Map of configuration key-value which reflect to the methods
+                    of the building blocks.</text>
+            </assertion>
+            <assertion id="4222-A3">
+                <text>Bad case: creating a BinaryClassifier using the Map of configuration key-value which contain invalid keys.</text>
+            </assertion>
+            <assertion id="4222-A4">
+                <text>Bad case: creating a BinaryClassifier using the Map of configuration key-value which contain invalid value types
+                    corresponding to the key. It must throw a ClassifierCreationException.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>B. Using the BinaryClassifier</text>
+            <assertion id="4222-B1">
+                <text>Use a created BinaryClassifier to classify SPAM and verify the output. The output must either return true or false.</text>
+            </assertion>
+            <assertion id="4222-B2">
+                <text>Classify input using a File object as input for the ImageClassifier.</text>
+            </assertion>
+            <assertion id="4222-B3">
+                <text>Classify input using a InputStream object as input for the ImageClassifier.</text>
+            </assertion>
+        </group>
+    </section>
+    <section id="4.2.3" title="Object Detection"/>
+    <section id="4.2.4" title="Regression"/>
+    <section id="4.2.5" title="Evaluation"/>
+    <section id="4.2.6" title="Input to Image Transformation"/>
+    <section id="4.2.6.1" title="ImageFactory Usability">
+        <group>
+            <text>A. Create output using ImageFactory implementations</text>
+            <assertion id="4261-A1">
+                <text>Each implementation must be able to return non-null output using a File object as input.</text>
+            </assertion>
+            <assertion id="4261-A2">
+                <text>Each implementation must be able to return non-null output using an InputStream object as input.</text>
+            </assertion>
+            <assertion id="4261-A3">
+                <text>Each implementation must be able to return non-null output using a URL object as input.</text>
+            </assertion>
+        </group>
+    </section>
+
     <!--<section id="4.2.1" title="Modelling of Currencies">-->
         <!--&lt;!&ndash; Tests class ModellingCurrenciesTest &ndash;&gt;-->
         <!--<group>-->
