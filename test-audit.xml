@@ -59,7 +59,7 @@
             <assertion id="421-D1">
                 <text>Must use the ImageClassifier.BuildingBlock to return an implemented and trained classification model as ImageClassifier.</text>
             </assertion>
-            <assertion id="421-D1">
+            <assertion id="421-D2">
                 <text>Must use the BinaryClassifier.BuildingBlock to return an implemented and trained classification model as BinaryClassifier.</text>
             </assertion>
         </group>
