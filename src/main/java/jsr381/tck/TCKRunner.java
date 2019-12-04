@@ -1,5 +1,8 @@
 package jsr381.tck;
 
+import jsr381.tck.tests.*;
+import jsr381.tck.tests.spi.ClassifierServiceTest;
+import jsr381.tck.tests.spi.ImplementationServiceTest;
 import jsr381.tck.tests.spi.ServiceProviderTest;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -35,6 +38,13 @@ public final class TCKRunner extends XmlSuite implements Tool {
         test.setName("TCK/Test Setup");
         List<XmlClass> classes = new ArrayList<>();
         classes.add(new XmlClass(ServiceProviderTest.class));
+        classes.add(new XmlClass(ClassifierServiceTest.class));
+        classes.add(new XmlClass(ImageFactoryTest.class));
+        classes.add(new XmlClass(ImplementationServiceTest.class));
+        classes.add(new XmlClass(ClassificationTest.class));
+        classes.add(new XmlClass(EvaluationTest.class));
+        classes.add(new XmlClass(ObjectDetectionTest.class));
+        classes.add(new XmlClass(RegressionTest.class));
         test.setXmlClasses(classes);
     }
 

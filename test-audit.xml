@@ -160,7 +160,7 @@
             </assertion>
         </group>
     </section>
-    <section id="4.2.3" title="Object Detection"/>
+<!--    <section id="4.2.3" title="Object Detection"/>-->
     <section id="4.2.4" title="Regression"/>
     <section id="4.2.5" title="Evaluation"/>
     <section id="4.2.6" title="Input to Image Transformation"/>
