@@ -41,9 +41,6 @@
         </group>
         <group>
             <text>B. Obtain Services from the Service Provider</text>
-            <assertion id="421-B1">
-                <text>(Deprecated) Obtain the implementation of BuilderService through the Service Provider</text>
-            </assertion>
             <assertion id="421-B2">
                 <text>Obtain the implementation of ClassifierService through the Service Provider</text>
             </assertion>

@@ -30,21 +30,6 @@ public class ServiceProviderTest {
     }
 
     /**
-     * Obtain the BuilderService from the service provider
-     */
-    @Test(description = "4.2.1 Obtain the implementation of BuilderService through the Service Provider.")
-    @SpecAssertion(section = "4.2.1", id = "421-B1")
-    public void testGetBuilderService() {
-        try {
-            final ServiceProvider serviceProvider = ServiceProvider.current();
-            final BuilderService service = serviceProvider.getBuilderService();
-            assertNotNull(service);
-        } catch (IllegalStateException | UnsupportedOperationException e) {
-            fail(e.getMessage());
-        }
-    }
-
-    /**
      * Obtain the ClassifierService from the service provider
      */
     @Test(description = "4.2.1 Obtain the implementation of ClassifierService through the Service Provider.")
