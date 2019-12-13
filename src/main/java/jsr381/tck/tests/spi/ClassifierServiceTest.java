@@ -31,4 +31,13 @@ public class ClassifierServiceTest {
         classifierService.createImageClassifier(config.getABImageClassificationBuildingBlock());
     }
 
+    @Test(description = "Must use the BinaryClassifier.BuildingBlock to return an implemented and trained classification model as BinaryClassifier.")
+    @SpecAssertion(section = "4.2.1", id = "421-D2")
+    public void testCreateBinaryClassifier() throws ClassifierCreationException {
+        ServiceProvider serviceProvider = ServiceProvider.current();
+        ClassifierService classifierService = serviceProvider.getClassifierService();
+        assertNotNull(classifierService);
+        classifierService.createBinaryClassifier(config.getSpamBinaryClassificationBuildingBlock());
+    }
+
 }
