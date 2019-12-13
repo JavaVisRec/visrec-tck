@@ -60,20 +60,8 @@ public class ClassificationTest {
         assertNotNull(imageClassifier);
     }
 
-    @Test(description = "4.2.2.1 Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid keys.")
-    @SpecAssertion(section = "4.2.2.1", id = "4221-A3")
-    public void testBuildWithConfigMapInvalidKey() {
-        Map<String, Object> configMap = new HashMap<>();
-        configMap.put("does_not_exist", "");
-        try {
-            ImageClassifier imageClassifier = ImageClassifier.builder().build(configMap);
-            fail("Should have thrown ClassifierCreationException due to unknown key");
-        } catch (ClassifierCreationException e) {
-        }
-    }
-
     @Test(description = "4.2.2.1 Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a ClassifierCreationException.")
-    @SpecAssertion(section = "4.2.2.1", id = "4221-A4")
+    @SpecAssertion(section = "4.2.2.1", id = "4221-A3")
     public void testBuildWithconfigMapInvalidValueType() {
         Map<String, Object> configMap = new HashMap<>();
         configMap.put("imageHeight", 0.28f); // normally imageHeight is int.

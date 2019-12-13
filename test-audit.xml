@@ -134,9 +134,6 @@
                     of the building blocks.</text>
             </assertion>
             <assertion id="4222-A3">
-                <text>Bad case: creating a BinaryClassifier using the Map of configuration key-value which contain invalid keys.</text>
-            </assertion>
-            <assertion id="4222-A4">
                 <text>Bad case: creating a BinaryClassifier using the Map of configuration key-value which contain invalid value types
                     corresponding to the key. It must throw a ClassifierCreationException.</text>
             </assertion>
