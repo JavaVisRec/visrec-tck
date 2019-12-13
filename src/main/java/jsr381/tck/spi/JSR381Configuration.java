@@ -4,12 +4,17 @@ import javax.visrec.ImageFactory;
 import javax.visrec.ml.classification.BinaryClassifier;
 import javax.visrec.ml.classification.ImageClassifier;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ServiceLoader;
 
 public interface JSR381Configuration {
 
-    ImageClassifier.BuildingBlock getABImageClassificationBuildingBlock();
+    ImageClassifier.BuildingBlock getABImageClassificationBuildingBlock(ImageClassifier.Builder builder);
+
+    Map<String, Object> getABImageClassificationConfigMap(Map<String, Object> configMap);
+
+    ImageClassifier.Builder getABImageClassificationBuilder(ImageClassifier.Builder builder);
 
     BinaryClassifier.BuildingBlock getSpamBinaryClassificationBuildingBlock();
 
