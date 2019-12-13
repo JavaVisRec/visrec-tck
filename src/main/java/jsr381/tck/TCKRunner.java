@@ -76,9 +76,9 @@ public final class TCKRunner extends XmlSuite implements Tool {
             tng.setOutputDirectory("./target/tck-output");
         }
         String verbose = System.getProperty("verbose");
-        if("true".equalsIgnoreCase(verbose)){
+//        if("true".equalsIgnoreCase(verbose)){
             tng.addListener(new VerboseReporter());
-        }
+//        }
         String reportFile = System.getProperty("reportFile");
         File file = null;
         if(reportFile!=null) {
