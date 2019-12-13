@@ -105,22 +105,19 @@
             <text>B. Using the ImageClassifier</text>
             <assertion id="4221-B1">
                 <text>Use a created ImageClassifier to classify MNIST and verify the output formation (not the accuracy). The key must
-                be the label and the value must be the float of accuracy.</text>
+                be the label and the value must be the float of accuracy. Input must be a file</text>
             </assertion>
             <assertion id="4221-B2">
-                <text>Classify input using a File object as input for the ImageClassifier.</text>
-            </assertion>
-            <assertion id="4221-B3">
                 <text>Classify input using a InputStream object as input for the ImageClassifier.</text>
             </assertion>
-            <assertion id="4221-B4">
+            <assertion id="4221-B3">
                 <text>Classify input using a BufferedImage object as input for the ImageClassifier.</text>
             </assertion>
-            <assertion id="4221-B5">
+            <assertion id="4221-B4">
                 <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input.
                 It must throw a ClassificationException.</text>
             </assertion>
-            <assertion id="4221-B6">
+            <assertion id="4221-B5">
                 <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input.
                     It must throw a ClassificationException.</text>
             </assertion>
@@ -172,6 +169,15 @@
             </assertion>
             <assertion id="4261-A3">
                 <text>Each implementation must be able to return non-null output using a URL object as input.</text>
+            </assertion>
+            <assertion id="4261-A4">
+                <text>Bad case: each implementation must throw an IOException if the File input is not an image.</text>
+            </assertion>
+            <assertion id="4261-A5">
+                <text>Bad case: each implementation must throw an IOException if the InputStream input is not an image.</text>
+            </assertion>
+            <assertion id="4261-A6">
+                <text>Bad case: each implementation must throw an IOException if the URL input is not an image.</text>
             </assertion>
         </group>
     </section>
