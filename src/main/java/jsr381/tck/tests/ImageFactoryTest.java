@@ -61,7 +61,7 @@ public class ImageFactoryTest {
         }
     }
 
-    @Test(description = "4.2.6.1 Bad case: each implementation must throw an IOException if the File input is not an image.")
+    @Test(description = "4.2.6.1 Each implementation must throw an IOException if the File input is not an image.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A4")
     public void testGetImageWithInvalidFileInput() {
         File randomTXT = new File(getRandomTXTFromResources().getFile());
@@ -73,7 +73,7 @@ public class ImageFactoryTest {
         }
     }
 
-    @Test(description = "4.2.6.1 Bad case: each implementation must throw an IOException if the InputStream input is not an image.")
+    @Test(description = "4.2.6.1 Each implementation must throw an IOException if the InputStream input is not an image.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A5")
     public void testGetImageWithInvalidInputStreamInput() throws IOException {
         FileInputStream randomTXT = new FileInputStream(new File(getRandomTXTFromResources().getFile()));
@@ -85,7 +85,7 @@ public class ImageFactoryTest {
         }
     }
 
-    @Test(description = "4.2.6.1 Bad case: each implementation must throw an IOException if the URL input is not an image.")
+    @Test(description = "4.2.6.1 Each implementation must throw an IOException if the URL input is not an image.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A6")
     public void testGetImageWithInvalidURLInput() throws IOException {
         URL randomTXT = getRandomTXTFromResources();

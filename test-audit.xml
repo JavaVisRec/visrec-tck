@@ -94,10 +94,10 @@
                 of the building blocks.</text>
             </assertion>
             <assertion id="4221-A3">
-                <text>Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid keys.</text>
+                <text>Creating an ImageClassifier using the Map of configuration key-value which contain invalid keys.</text>
             </assertion>
             <assertion id="4221-A4">
-                <text>Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid value types
+                <text>Creating an ImageClassifier using the Map of configuration key-value which contain invalid value types
                     corresponding to the key. It must throw a ClassifierCreationException.</text>
             </assertion>
         </group>
@@ -114,11 +114,11 @@
                 <text>Classify input using a BufferedImage object as input for the ImageClassifier.</text>
             </assertion>
             <assertion id="4221-B4">
-                <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input.
+                <text>Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input.
                 It must throw a ClassificationException.</text>
             </assertion>
             <assertion id="4221-B5">
-                <text>Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input.
+                <text>Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input.
                     It must throw a ClassificationException.</text>
             </assertion>
         </group>
@@ -134,7 +134,7 @@
                     of the building blocks.</text>
             </assertion>
             <assertion id="4222-A3">
-                <text>Bad case: creating a BinaryClassifier using the Map of configuration key-value which contain invalid value types
+                <text>Creating a BinaryClassifier using the Map of configuration key-value which contain invalid value types
                     corresponding to the key. It must throw a ClassifierCreationException.</text>
             </assertion>
         </group>
@@ -168,13 +168,13 @@
                 <text>Each implementation must be able to return non-null output using a URL object as input.</text>
             </assertion>
             <assertion id="4261-A4">
-                <text>Bad case: each implementation must throw an IOException if the File input is not an image.</text>
+                <text>Each implementation must throw an IOException if the File input is not an image.</text>
             </assertion>
             <assertion id="4261-A5">
-                <text>Bad case: each implementation must throw an IOException if the InputStream input is not an image.</text>
+                <text>Each implementation must throw an IOException if the InputStream input is not an image.</text>
             </assertion>
             <assertion id="4261-A6">
-                <text>Bad case: each implementation must throw an IOException if the URL input is not an image.</text>
+                <text>Each implementation must throw an IOException if the URL input is not an image.</text>
             </assertion>
         </group>
     </section>

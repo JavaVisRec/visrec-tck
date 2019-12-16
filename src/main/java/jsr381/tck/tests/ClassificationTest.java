@@ -60,7 +60,7 @@ public class ClassificationTest {
         assertNotNull(imageClassifier);
     }
 
-    @Test(description = "4.2.2.1 Bad case: creating an ImageClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a ClassifierCreationException.")
+    @Test(description = "4.2.2.1 Creating an ImageClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a ClassifierCreationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-A3")
     public void testBuildWithconfigMapInvalidValueType() {
         Map<String, Object> configMap = new HashMap<>();
@@ -125,7 +125,7 @@ public class ClassificationTest {
         assertEquals(2, result.entrySet().size());
     }
 
-    @Test(description = "4.2.2.1 Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input. It must throw a ClassificationException.")
+    @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B4")
     public void testClassifyWithInvalidInputAsInputStreamInput() throws ClassifierCreationException, IOException {
         ImageClassifier imageClassifier = config.getABImageClassificationBuilder(ImageClassifier.builder()
@@ -142,7 +142,7 @@ public class ClassificationTest {
         } catch (ClassificationException e) {}
     }
 
-    @Test(description = "4.2.2.1 Bad case: attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input. It must throw a ClassificationException.")
+    @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B5")
     public void testClassifyWithInvalidInputAsFileInput() throws ClassifierCreationException, ClassificationException, IOException {
         ImageClassifier imageClassifier = config.getABImageClassificationBuilder(ImageClassifier.builder()
