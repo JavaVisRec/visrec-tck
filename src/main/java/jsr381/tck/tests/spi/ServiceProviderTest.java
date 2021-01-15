@@ -37,7 +37,7 @@ public class ServiceProviderTest {
     public void testGetClassifierService() {
         try {
             final ServiceProvider serviceProvider = ServiceProvider.current();
-            final ClassifierService service = serviceProvider.getClassifierService();
+            final ClassifierService service = serviceProvider.getClassifierFactoryService();
             assertNotNull(service);
         } catch (IllegalStateException | UnsupportedOperationException e) {
             fail(e.getMessage());
