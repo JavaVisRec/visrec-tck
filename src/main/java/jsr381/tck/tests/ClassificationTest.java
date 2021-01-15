@@ -6,8 +6,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.visrec.ml.ClassificationException;
-import javax.visrec.ml.ClassifierCreationException;
+import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.ImageClassifier;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
 import javax.visrec.spi.ServiceProvider;
@@ -53,7 +52,7 @@ public class ClassificationTest {
 
     @Test(description = "4.2.2.1 Use a created ImageClassifier to classify MNIST and verify the output formation (not the accuracy). The key must be the label and the value must be the float of accuracy.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B1")
-    public void testClassifyPartialMNIST() throws ClassifierCreationException, ClassificationException {
+    public void testClassifyPartialMNIST() throws ClassifierCreationException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -72,7 +71,7 @@ public class ClassificationTest {
 
     @Test(description = "4.2.2.1 Classify input using a InputStream object as input for the ImageClassifier.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B2")
-    public void testClassifyWithInputStreamAsInput() throws ClassifierCreationException, ClassificationException, FileNotFoundException {
+    public void testClassifyWithInputStreamAsInput() throws ClassifierCreationException, FileNotFoundException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -88,7 +87,7 @@ public class ClassificationTest {
 
     @Test(description = "4.2.2.1 Classify input using a BufferedImage object as input for the ImageClassifier.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B3")
-    public void testClassifyWithBufferedImageAsInput() throws ClassifierCreationException, ClassificationException, IOException {
+    public void testClassifyWithBufferedImageAsInput() throws ClassifierCreationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
