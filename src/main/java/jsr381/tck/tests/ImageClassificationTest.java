@@ -11,6 +11,7 @@ import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.ImageClassifier;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
 import javax.visrec.spi.ServiceProvider;
+import javax.visrec.util.InvalidBuilderConfigurationException;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +29,7 @@ import static org.testng.Assert.fail;
  * @author Kevin Berendsen
  */
 @SpecVersion(spec = "JSR 381", version = "1.0.0")
-public class ClassificationTest {
+public class ImageClassificationTest {
 
     private JSR381Configuration config;
 
@@ -49,6 +50,37 @@ public class ClassificationTest {
                 .learningRate(0.01f))
                 .build();
         assertNotNull(imageClassifier);
+    }
+
+    @Test(description = "4.2.2.1 Create an ImageClassifier using a Map of configuration key-value which reflect to the methods of the building blocks.")
+    @SpecAssertion(section = "4.2.2.1", id = "4221-A2")
+    public void testBuildWithMapConfiguration() throws ClassifierCreationException {
+        Map<String, Object> configuration = Map.of(
+                "inputClass", BufferedImage.class,
+                "imageHeight", 28,
+                "imageWidth", 28,
+                "maxError", 0.4f,
+                "maxEpochs", 100,
+                "learningRate", 0.01f
+        );
+        ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder())
+                .build(configuration);
+        assertNotNull(imageClassifier);
+    }
+
+    @Test(description = "4.2.2.1 Creating an ImageClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a InvalidBuilderConfigurationException.")
+    @SpecAssertion(section = "4.2.2.1", id = "4221-A3")
+    public void testBuildWithMapConfigurationWithInvalidValueTypes() throws ClassifierCreationException {
+        Map<String, Object> configuration = Map.of(
+                "inputClass", 1
+        );
+        try {
+            config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder())
+                    .build(configuration);
+            fail("Build() should result into a InvalidBuilderConfigurationException");
+        } catch (InvalidBuilderConfigurationException e) {
+            // Good
+        }
     }
 
     @Test(description = "4.2.2.1 Use a created ImageClassifier to classify MNIST and verify the output formation (not the accuracy). The key must be the label and the value must be the float of accuracy.")
@@ -149,14 +181,14 @@ public class ClassificationTest {
     }
 
     private URL getOnePNGFromResources() {
-        URL url = ClassificationTest.class.getClassLoader().getResource("1.png");
+        URL url = ImageClassificationTest.class.getClassLoader().getResource("1.png");
         if (url == null)
             throw new IllegalStateException("Unable to find 1.png in resources.");
         return url;
     }
 
     private URL getRandomTXTFromResources() {
-        URL url = ClassificationTest.class.getClassLoader().getResource("random.txt");
+        URL url = ImageClassificationTest.class.getClassLoader().getResource("random.txt");
         if (url == null)
             throw new IllegalStateException("Unable to find random.txt in resources.");
         return url;

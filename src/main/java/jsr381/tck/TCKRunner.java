@@ -1,6 +1,7 @@
 package jsr381.tck;
 
-import jsr381.tck.tests.ClassificationTest;
+import jsr381.tck.tests.BinaryClassificationTest;
+import jsr381.tck.tests.ImageClassificationTest;
 import jsr381.tck.tests.EvaluationTest;
 import jsr381.tck.tests.ImageFactoryTest;
 import jsr381.tck.tests.ObjectDetectionTest;
@@ -58,7 +59,8 @@ public final class TCKRunner extends XmlSuite implements Tool {
         classes.add(new XmlClass(ImageFactoryServiceTest.class));
         classes.add(new XmlClass(ImageFactoryTest.class));
         classes.add(new XmlClass(ImplementationServiceTest.class));
-        classes.add(new XmlClass(ClassificationTest.class));
+        classes.add(new XmlClass(ImageClassificationTest.class));
+        classes.add(new XmlClass(BinaryClassificationTest.class));
         classes.add(new XmlClass(EvaluationTest.class));
         classes.add(new XmlClass(ObjectDetectionTest.class));
         classes.add(new XmlClass(RegressionTest.class));

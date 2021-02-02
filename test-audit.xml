@@ -102,8 +102,7 @@
             </assertion>
             <assertion id="4221-A3">
                 <text>Creating an ImageClassifier using the Map of configuration key-value which contain invalid value
-                    types§
-                    corresponding to the key. It must throw a ClassifierCreationException.
+                    types corresponding to the key. It must throw a InvalidBuilderConfigurationException.
                 </text>
             </assertion>
         </group>
@@ -142,9 +141,13 @@
                 <text>Create a BinaryClassifier using the building blocks in the builder design pattern.</text>
             </assertion>
             <assertion id="4222-A2">
+                <text>Create an BinaryClassifier using a Map of configuration key-value which reflect to the methods
+                    of the building blocks.
+                </text>
+            </assertion>
+            <assertion id="4222-A3">
                 <text>Creating a BinaryClassifier using the Map of configuration key-value which contain invalid value
-                    types
-                    corresponding to the key. It must throw a ClassifierCreationException.
+                    types corresponding to the key. It must throw a InvalidBuilderConfigurationException.
                 </text>
             </assertion>
         </group>
@@ -154,12 +157,6 @@
                 <text>Use a created BinaryClassifier to classify SPAM and verify the output. The output must either
                     return true or false.
                 </text>
-            </assertion>
-            <assertion id="4222-B2">
-                <text>Classify input using a Path object as input for the ImageClassifier.</text>
-            </assertion>
-            <assertion id="4222-B3">
-                <text>Classify input using a InputStream object as input for the ImageClassifier.</text>
             </assertion>
         </group>
     </section>
