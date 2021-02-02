@@ -1,6 +1,10 @@
 package jsr381.tck;
 
-import jsr381.tck.tests.*;
+import jsr381.tck.tests.ClassificationTest;
+import jsr381.tck.tests.EvaluationTest;
+import jsr381.tck.tests.ImageFactoryTest;
+import jsr381.tck.tests.ObjectDetectionTest;
+import jsr381.tck.tests.RegressionTest;
 import jsr381.tck.tests.spi.ClassifierServiceTest;
 import jsr381.tck.tests.spi.ImageFactoryServiceTest;
 import jsr381.tck.tests.spi.ImplementationServiceTest;
@@ -16,9 +20,20 @@ import org.testng.xml.XmlTest;
 
 import javax.lang.model.SourceVersion;
 import javax.tools.Tool;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Kevin Berendsen
@@ -58,7 +73,8 @@ public final class TCKRunner extends XmlSuite implements Tool {
      *     <li>-DreportFile=targetFile.txt for defining the TCK result summary report target file
      *     (default: ./target/tck-results.txt).</li>
      * </ul>
-     * @param args
+     *
+     * @param args arguments
      */
     @Override
     public int run(InputStream in, OutputStream out, OutputStream err,
@@ -69,22 +85,20 @@ public final class TCKRunner extends XmlSuite implements Tool {
         TestNG tng = new TestNG();
         tng.setXmlSuites(suites);
         String outDir = System.getProperty("outputDir");
-        if(outDir!=null) {
+        if (outDir != null) {
             tng.setOutputDirectory(outDir);
-        }
-        else{
+        } else {
             tng.setOutputDirectory("./target/tck-output");
         }
         String verbose = System.getProperty("verbose");
 //        if("true".equalsIgnoreCase(verbose)){
-            tng.addListener(new VerboseReporter());
+        tng.addListener(new VerboseReporter());
 //        }
         String reportFile = System.getProperty("reportFile");
         File file = null;
-        if(reportFile!=null) {
+        if (reportFile != null) {
             file = new File(reportFile);
-        }
-        else{
+        } else {
             file = new File("./target/tck-results.txt");
         }
         TCKReporter rep = new TCKReporter(file);
@@ -121,6 +135,7 @@ public final class TCKRunner extends XmlSuite implements Tool {
 
         /**
          * Constructor of the TCK reporter, writing to the given file.
+         *
          * @param file the target file, not null.
          */
         @SuppressWarnings("CallToPrintStackTrace")

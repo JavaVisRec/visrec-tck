@@ -6,16 +6,17 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import javax.visrec.ml.classification.ClassificationException;
 import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.ImageClassifier;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
 import javax.visrec.spi.ServiceProvider;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
@@ -61,7 +62,7 @@ public class ClassificationTest {
                 .maxEpochs(100)
                 .learningRate(0.01f))
                 .build();
-        Map<String, Float> result = imageClassifier.classify(new File(getOnePNGFromResources().getFile()));
+        Map<String, Float> result = imageClassifier.classify(Path.of(getOnePNGFromResources().getFile()));
         assertEquals(2, result.entrySet().size());
         Float oneAccuracy = result.get("1");
         assertTrue(oneAccuracy > 0 && oneAccuracy < 1);
@@ -81,7 +82,7 @@ public class ClassificationTest {
                 .learningRate(0.01f))
                 .build();
         Map<String, Float> result = imageClassifier.classify(
-                new FileInputStream(new File(getOnePNGFromResources().getFile())));
+                new FileInputStream(getOnePNGFromResources().getFile()));
         assertEquals(2, result.entrySet().size());
     }
 
@@ -107,7 +108,7 @@ public class ClassificationTest {
         assertEquals(2, result.entrySet().size());
     }
 
-    @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a File object as input. It must throw a ClassificationException.")
+    @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a Path object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B4")
     public void testClassifyWithInvalidInputAsInputStreamInput() throws ClassifierCreationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
@@ -120,7 +121,7 @@ public class ClassificationTest {
                 .build();
 
         try {
-            imageClassifier.classify(new FileInputStream(getRandomTXTFromResources()));
+            imageClassifier.classify(new FileInputStream(getRandomTXTFromResources().getFile()));
             fail("Classify() should fail due to invalid input type (txt file wrapped in an InputStream object)");
         } catch (ClassificationException e) {
             // Good
@@ -129,7 +130,7 @@ public class ClassificationTest {
 
     @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B5")
-    public void testClassifyWithInvalidInputAsFileInput() throws ClassifierCreationException, ClassificationException, IOException {
+    public void testClassifyWithInvalidInputAsPathInput() throws ClassifierCreationException, ClassificationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -140,7 +141,7 @@ public class ClassificationTest {
                 .build();
 
         try {
-            imageClassifier.classify(getRandomTXTFromResources());
+            imageClassifier.classify(Path.of(getRandomTXTFromResources().getFile()));
             fail("Classify() should fail due to invalid input type (txt file wrapped in an File object)");
         } catch (ClassificationException e) {
             // Good
@@ -154,10 +155,10 @@ public class ClassificationTest {
         return url;
     }
 
-    private File getRandomTXTFromResources() {
+    private URL getRandomTXTFromResources() {
         URL url = ClassificationTest.class.getClassLoader().getResource("random.txt");
         if (url == null)
             throw new IllegalStateException("Unable to find random.txt in resources.");
-        return new File(url.getFile());
+        return url;
     }
 }

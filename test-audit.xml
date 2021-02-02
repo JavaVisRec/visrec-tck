@@ -102,7 +102,7 @@
             </assertion>
             <assertion id="4221-A3">
                 <text>Creating an ImageClassifier using the Map of configuration key-value which contain invalid value
-                    types
+                    types§
                     corresponding to the key. It must throw a ClassifierCreationException.
                 </text>
             </assertion>
@@ -129,7 +129,7 @@
             </assertion>
             <assertion id="4221-B5">
                 <text>Attempt to classify input which is not an image and can't be transformed to a BufferedImage using
-                    a File object as input.
+                    a Path object as input.
                     It must throw a ClassificationException.
                 </text>
             </assertion>
@@ -156,7 +156,7 @@
                 </text>
             </assertion>
             <assertion id="4222-B2">
-                <text>Classify input using a File object as input for the ImageClassifier.</text>
+                <text>Classify input using a Path object as input for the ImageClassifier.</text>
             </assertion>
             <assertion id="4222-B3">
                 <text>Classify input using a InputStream object as input for the ImageClassifier.</text>
@@ -171,7 +171,7 @@
         <group>
             <text>A. Create output using ImageFactory implementations</text>
             <assertion id="4261-A1">
-                <text>Each implementation must be able to return non-null output using a File object as input.</text>
+                <text>Each implementation must be able to return non-null output using a Path object as input.</text>
             </assertion>
             <assertion id="4261-A2">
                 <text>Each implementation must be able to return non-null output using an InputStream object as input.
@@ -181,7 +181,7 @@
                 <text>Each implementation must be able to return non-null output using a URL object as input.</text>
             </assertion>
             <assertion id="4261-A4">
-                <text>Each implementation must throw an IOException if the File input is not an image.</text>
+                <text>Each implementation must throw an IOException if the Path input is not an image.</text>
             </assertion>
             <assertion id="4261-A5">
                 <text>Each implementation must throw an IOException if the InputStream input is not an image.</text>

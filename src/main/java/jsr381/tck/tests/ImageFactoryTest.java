@@ -7,10 +7,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.visrec.ImageFactory;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 
 import static org.testng.Assert.fail;
 
@@ -24,12 +24,12 @@ public class ImageFactoryTest {
         config = JSR381Configuration.Load();
     }
 
-    @Test(description = "4.2.6.1 Each implementation must be able to return non-null output using a File object as input.")
+    @Test(description = "4.2.6.1 Each implementation must be able to return non-null output using a Path object as input.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A1")
-    public void testGetImageWithFileAsInput() throws IOException {
-        File file = new File(getRedJPGFromResources().getFile());
+    public void testGetImageWithPathAsInput() throws IOException {
+        Path path = Path.of(getRedJPGFromResources().getFile());
         for (ImageFactory<?> imageFactory : config.getImageFactories()) {
-            Object obj = imageFactory.getImage(file);
+            Object obj = imageFactory.getImage(path);
             if (obj == null) {
                 fail("obj == null using ImageFactory: " + imageFactory.getClass().getName());
             }
@@ -39,8 +39,7 @@ public class ImageFactoryTest {
     @Test(description = "4.2.6.1 Each implementation must be able to return non-null output using an InputStream object as input.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A2")
     public void testGetImageWithInputStreamAsInput() throws IOException {
-        File file = new File(getRedJPGFromResources().getFile());
-        FileInputStream fis = new FileInputStream(file);
+        FileInputStream fis = new FileInputStream(getRedJPGFromResources().getFile());
         for (ImageFactory<?> imageFactory : config.getImageFactories()) {
             Object obj = imageFactory.getImage(fis);
             if (obj == null) {
@@ -61,27 +60,29 @@ public class ImageFactoryTest {
         }
     }
 
-    @Test(description = "4.2.6.1 Each implementation must throw an IOException if the File input is not an image.")
+    @Test(description = "4.2.6.1 Each implementation must throw an IOException if the Path input is not an image.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A4")
     public void testGetImageWithInvalidFileInput() {
-        File randomTXT = new File(getRandomTXTFromResources().getFile());
+        Path path = Path.of(getRandomTXTFromResources().getFile());
         for (ImageFactory<?> imageFactory : config.getImageFactories()) {
             try {
-                imageFactory.getImage(randomTXT);
+                imageFactory.getImage(path);
                 fail(String.format("ImageFactory [%s] should have thrown an IOException", imageFactory.getClass().getName()));
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
     }
 
     @Test(description = "4.2.6.1 Each implementation must throw an IOException if the InputStream input is not an image.")
     @SpecAssertion(section = "4.2.6.1", id = "4261-A5")
     public void testGetImageWithInvalidInputStreamInput() throws IOException {
-        FileInputStream randomTXT = new FileInputStream(new File(getRandomTXTFromResources().getFile()));
+        FileInputStream randomTXT = new FileInputStream(getRandomTXTFromResources().getFile());
         for (ImageFactory<?> imageFactory : config.getImageFactories()) {
             try {
                 imageFactory.getImage(randomTXT);
                 fail(String.format("ImageFactory [%s] should have thrown an IOException", imageFactory.getClass().getName()));
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
     }
 
@@ -93,7 +94,8 @@ public class ImageFactoryTest {
             try {
                 imageFactory.getImage(randomTXT);
                 fail(String.format("ImageFactory [%s] should have thrown an IOException", imageFactory.getClass().getName()));
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
     }
 

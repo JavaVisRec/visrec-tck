@@ -6,7 +6,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.visrec.ml.ClassifierCreationException;
+import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
 import javax.visrec.spi.ClassifierFactoryService;
 import javax.visrec.spi.ServiceProvider;
