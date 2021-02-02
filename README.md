@@ -5,4 +5,6 @@ The TCK comes with an audit file and the tests. The audit file is used for the A
 and then implement those tests. A TCK coverage report tells if the audit file is implemented as tests for implementors. 
 
 ### How to generate a TCK coverage report
-`mvn clean install -DcreateTCKReport=true`
+`mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Dgpg.skip -DcreateTCKReport=true`
+
+And then open the report: `target/coverage-JSR 381.html`

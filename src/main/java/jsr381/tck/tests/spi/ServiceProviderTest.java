@@ -4,7 +4,10 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import javax.visrec.spi.*;
+import javax.visrec.spi.ClassifierFactoryService;
+import javax.visrec.spi.ImageFactoryService;
+import javax.visrec.spi.ImplementationService;
+import javax.visrec.spi.ServiceProvider;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
@@ -37,7 +40,7 @@ public class ServiceProviderTest {
     public void testGetClassifierService() {
         try {
             final ServiceProvider serviceProvider = ServiceProvider.current();
-            final ClassifierService service = serviceProvider.getClassifierService();
+            final ClassifierFactoryService service = serviceProvider.getClassifierFactoryService();
             assertNotNull(service);
         } catch (IllegalStateException | UnsupportedOperationException e) {
             fail(e.getMessage());

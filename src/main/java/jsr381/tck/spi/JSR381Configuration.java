@@ -1,22 +1,22 @@
 package jsr381.tck.spi;
 
 import javax.visrec.ImageFactory;
-import javax.visrec.ml.classification.BinaryClassifier;
-import javax.visrec.ml.classification.ImageClassifier;
+import javax.visrec.ml.classification.NeuralNetBinaryClassifier;
+import javax.visrec.ml.classification.NeuralNetImageClassifier;
+import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.ServiceLoader;
 
 public interface JSR381Configuration {
 
-    ImageClassifier.BuildingBlock getABImageClassificationBuildingBlock(ImageClassifier.Builder builder);
+    NeuralNetImageClassifier.BuildingBlock<BufferedImage> getABImageClassificationBuildingBlock(NeuralNetImageClassifier.Builder<BufferedImage> builder);
 
-    Map<String, Object> getABImageClassificationConfigMap(Map<String, Object> configMap);
+    NeuralNetImageClassifier.Builder<BufferedImage> getABImageClassificationBuilder(NeuralNetImageClassifier.Builder<BufferedImage> builder);
 
-    ImageClassifier.Builder getABImageClassificationBuilder(ImageClassifier.Builder builder);
+    NeuralNetBinaryClassifier.BuildingBlock<float[]> getSpamBinaryClassificationBuildingBlock();
 
-    BinaryClassifier.BuildingBlock getSpamBinaryClassificationBuildingBlock();
+    NeuralNetBinaryClassifier.Builder<float[]> getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.Builder<float[]> builder);
 
     List<ImageFactory<?>> getImageFactories();
 

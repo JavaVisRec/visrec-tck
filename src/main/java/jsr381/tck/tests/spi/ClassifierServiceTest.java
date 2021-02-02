@@ -6,10 +6,11 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.visrec.ml.ClassifierCreationException;
-import javax.visrec.ml.classification.ImageClassifier;
-import javax.visrec.spi.ClassifierService;
+import javax.visrec.ml.classification.ClassifierCreationException;
+import javax.visrec.ml.classification.NeuralNetImageClassifier;
+import javax.visrec.spi.ClassifierFactoryService;
 import javax.visrec.spi.ServiceProvider;
+import java.awt.image.BufferedImage;
 
 import static org.testng.Assert.assertNotNull;
 
@@ -27,10 +28,11 @@ public class ClassifierServiceTest {
     @SpecAssertion(section = "4.2.1", id = "421-D1")
     public void testCreateImageClassifier() throws ClassifierCreationException {
         ServiceProvider serviceProvider = ServiceProvider.current();
-        ClassifierService classifierService = serviceProvider.getClassifierService();
-        assertNotNull(classifierService);
-        classifierService.createImageClassifier(config.getABImageClassificationBuildingBlock(
-                config.getABImageClassificationBuilder(ImageClassifier.builder()
+        ClassifierFactoryService classifierFactoryService = serviceProvider.getClassifierFactoryService();
+        assertNotNull(classifierFactoryService);
+        classifierFactoryService.createNeuralNetImageClassifier(config.getABImageClassificationBuildingBlock(
+                config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
+                        .inputClass(BufferedImage.class)
                         .imageHeight(28)
                         .imageWidth(28)
                         .maxError(0.4f)
@@ -43,9 +45,9 @@ public class ClassifierServiceTest {
     @SpecAssertion(section = "4.2.1", id = "421-D2")
     public void testCreateBinaryClassifier() throws ClassifierCreationException {
         ServiceProvider serviceProvider = ServiceProvider.current();
-        ClassifierService classifierService = serviceProvider.getClassifierService();
-        assertNotNull(classifierService);
-        classifierService.createBinaryClassifier(config.getSpamBinaryClassificationBuildingBlock());
+        ClassifierFactoryService classifierFactoryService = serviceProvider.getClassifierFactoryService();
+        assertNotNull(classifierFactoryService);
+        classifierFactoryService.createNeuralNetBinaryClassifier(config.getSpamBinaryClassificationBuildingBlock());
     }
 
 }
