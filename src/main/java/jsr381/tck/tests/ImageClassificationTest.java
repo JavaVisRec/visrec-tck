@@ -7,11 +7,11 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.visrec.ml.classification.ClassificationException;
-import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.ImageClassifier;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
+import javax.visrec.ml.model.InvalidConfigurationException;
+import javax.visrec.ml.model.ModelCreationException;
 import javax.visrec.spi.ServiceProvider;
-import javax.visrec.util.InvalidBuilderConfigurationException;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,7 +40,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Create an ImageClassifier using the building blocks in the builder design pattern.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-A1")
-    public void testBuildWithBuildingBlock() throws ClassifierCreationException {
+    public void testBuildWithBuildingBlock() throws ModelCreationException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -54,7 +54,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Create an ImageClassifier using a Map of configuration key-value which reflect to the methods of the building blocks.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-A2")
-    public void testBuildWithMapConfiguration() throws ClassifierCreationException {
+    public void testBuildWithMapConfiguration() throws ModelCreationException {
         Map<String, Object> configuration = Map.of(
                 "inputClass", BufferedImage.class,
                 "imageHeight", 28,
@@ -70,7 +70,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Creating an ImageClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a InvalidBuilderConfigurationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-A3")
-    public void testBuildWithMapConfigurationWithInvalidValueTypes() throws ClassifierCreationException {
+    public void testBuildWithMapConfigurationWithInvalidValueTypes() throws ModelCreationException {
         Map<String, Object> configuration = Map.of(
                 "inputClass", 1
         );
@@ -78,14 +78,14 @@ public class ImageClassificationTest {
             config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder())
                     .build(configuration);
             fail("Build() should result into a InvalidBuilderConfigurationException");
-        } catch (InvalidBuilderConfigurationException e) {
+        } catch (InvalidConfigurationException e) {
             // Good
         }
     }
 
     @Test(description = "4.2.2.1 Use a created ImageClassifier to classify MNIST and verify the output formation (not the accuracy). The key must be the label and the value must be the float of accuracy.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B1")
-    public void testClassifyPartialMNIST() throws ClassifierCreationException {
+    public void testClassifyPartialMNIST() throws ModelCreationException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -104,7 +104,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Classify input using a InputStream object as input for the ImageClassifier.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B2")
-    public void testClassifyWithInputStreamAsInput() throws ClassifierCreationException, FileNotFoundException {
+    public void testClassifyWithInputStreamAsInput() throws ModelCreationException, FileNotFoundException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -120,7 +120,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Classify input using a BufferedImage object as input for the ImageClassifier.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B3")
-    public void testClassifyWithBufferedImageAsInput() throws ClassifierCreationException, IOException {
+    public void testClassifyWithBufferedImageAsInput() throws ModelCreationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -142,7 +142,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a Path object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B4")
-    public void testClassifyWithInvalidInputAsInputStreamInput() throws ClassifierCreationException, IOException {
+    public void testClassifyWithInvalidInputAsInputStreamInput() throws ModelCreationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)
@@ -162,7 +162,7 @@ public class ImageClassificationTest {
 
     @Test(description = "4.2.2.1 Attempt to classify input which is not an image and can't be transformed to a BufferedImage using a InputStream object as input. It must throw a ClassificationException.")
     @SpecAssertion(section = "4.2.2.1", id = "4221-B5")
-    public void testClassifyWithInvalidInputAsPathInput() throws ClassifierCreationException, ClassificationException, IOException {
+    public void testClassifyWithInvalidInputAsPathInput() throws ModelCreationException, ClassificationException, IOException {
         ImageClassifier<BufferedImage> imageClassifier = config.getABImageClassificationBuilder(NeuralNetImageClassifier.builder()
                 .inputClass(BufferedImage.class)
                 .imageHeight(28)

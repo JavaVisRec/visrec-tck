@@ -7,9 +7,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.visrec.ml.classification.BinaryClassifier;
-import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.NeuralNetBinaryClassifier;
-import javax.visrec.util.InvalidBuilderConfigurationException;
+import javax.visrec.ml.model.InvalidConfigurationException;
+import javax.visrec.ml.model.ModelCreationException;
 import java.util.Map;
 
 import static org.testng.Assert.assertNotNull;
@@ -30,7 +30,7 @@ public class BinaryClassificationTest {
 
     @Test(description = "4.2.2.2 Create an BinaryClassifier using the building blocks in the builder design pattern.")
     @SpecAssertion(section = "4.2.2.2", id = "4222-A1")
-    public void testBuildWithBuildingBlock() throws ClassifierCreationException {
+    public void testBuildWithBuildingBlock() throws ModelCreationException {
         BinaryClassifier<float[]> classifier = config.getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.builder()
                 .inputClass(float[].class)
                 .inputsNum(57)
@@ -44,7 +44,7 @@ public class BinaryClassificationTest {
 
     @Test(description = "4.2.2.2 Create an BinaryClassifier using a Map of configuration key-value which reflect to the methods of the building blocks.")
     @SpecAssertion(section = "4.2.2.2", id = "4222-A2")
-    public void testBuildWithMapConfiguration() throws ClassifierCreationException {
+    public void testBuildWithMapConfiguration() throws ModelCreationException {
         Map<String, Object> configuration = Map.of(
                 "inputClass", float[].class,
                 "inputsNum", 57,
@@ -60,7 +60,7 @@ public class BinaryClassificationTest {
 
     @Test(description = "4.2.2.2 Creating an BinaryClassifier using the Map of configuration key-value which contain invalid value types corresponding to the key. It must throw a InvalidBuilderConfigurationException.")
     @SpecAssertion(section = "4.2.2.2", id = "4222-A3")
-    public void testBuildWithMapConfigurationWithInvalidValueTypes() throws ClassifierCreationException {
+    public void testBuildWithMapConfigurationWithInvalidValueTypes() throws ModelCreationException {
         Map<String, Object> configuration = Map.of(
                 "inputClass", 1
         );
@@ -68,14 +68,14 @@ public class BinaryClassificationTest {
             config.getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.builder().inputClass(float[].class))
                     .build(configuration);
             fail("Build() should result into a InvalidBuilderConfigurationException");
-        } catch (InvalidBuilderConfigurationException e) {
+        } catch (InvalidConfigurationException e) {
             // Good
         }
     }
 
     @Test(description = "4.2.2.2 Use a created BinaryClassifier to classify SPAM and verify the output. The output must either return true or false.")
     @SpecAssertion(section = "4.2.2.2", id = "4222-B1")
-    public void testClassifySpam() throws ClassifierCreationException {
+    public void testClassifySpam() throws ModelCreationException {
         BinaryClassifier<float[]> classifier = config.getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.builder()
                 .inputClass(float[].class)
                 .inputsNum(57)

@@ -6,8 +6,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.visrec.ml.classification.ClassifierCreationException;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
+import javax.visrec.ml.model.ModelCreationException;
 import javax.visrec.spi.ClassifierFactoryService;
 import javax.visrec.spi.ServiceProvider;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,7 @@ public class ClassifierServiceTest {
 
     @Test(description = "4.2.1 Must use the ImageClassifier.BuildingBlock to return an implemented and trained classification model as ImageClassifier.")
     @SpecAssertion(section = "4.2.1", id = "421-D1")
-    public void testCreateImageClassifier() throws ClassifierCreationException {
+    public void testCreateImageClassifier() throws ModelCreationException {
         ServiceProvider serviceProvider = ServiceProvider.current();
         ClassifierFactoryService classifierFactoryService = serviceProvider.getClassifierFactoryService();
         assertNotNull(classifierFactoryService);
@@ -43,7 +43,7 @@ public class ClassifierServiceTest {
 
     @Test(description = "Must use the BinaryClassifier.BuildingBlock to return an implemented and trained classification model as BinaryClassifier.")
     @SpecAssertion(section = "4.2.1", id = "421-D2")
-    public void testCreateBinaryClassifier() throws ClassifierCreationException {
+    public void testCreateBinaryClassifier() throws ModelCreationException {
         ServiceProvider serviceProvider = ServiceProvider.current();
         ClassifierFactoryService classifierFactoryService = serviceProvider.getClassifierFactoryService();
         assertNotNull(classifierFactoryService);
