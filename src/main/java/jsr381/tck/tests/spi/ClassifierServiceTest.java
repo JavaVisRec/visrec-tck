@@ -6,6 +6,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import javax.visrec.ml.classification.NeuralNetBinaryClassifier;
 import javax.visrec.ml.classification.NeuralNetImageClassifier;
 import javax.visrec.ml.model.ModelCreationException;
 import javax.visrec.spi.ClassifierFactoryService;
@@ -47,7 +48,15 @@ public class ClassifierServiceTest {
         ServiceProvider serviceProvider = ServiceProvider.current();
         ClassifierFactoryService classifierFactoryService = serviceProvider.getClassifierFactoryService();
         assertNotNull(classifierFactoryService);
-        classifierFactoryService.createNeuralNetBinaryClassifier(config.getSpamBinaryClassificationBuildingBlock());
+        classifierFactoryService.createNeuralNetBinaryClassifier(config.getSpamBinaryClassificationBuildingBlock(
+                NeuralNetBinaryClassifier.builder()
+                        .inputClass(float[].class)
+                        .inputsNum(57)
+                        .hiddenLayers(30, 15)
+                        .maxError(0.03f)
+                        .maxEpochs(15000)
+                        .learningRate(0.01f)
+        ));
     }
 
 }

@@ -14,7 +14,7 @@ public interface JSR381Configuration {
 
     NeuralNetImageClassifier.Builder<BufferedImage> getABImageClassificationBuilder(NeuralNetImageClassifier.Builder<BufferedImage> builder);
 
-    NeuralNetBinaryClassifier.BuildingBlock<float[]> getSpamBinaryClassificationBuildingBlock();
+    NeuralNetBinaryClassifier.BuildingBlock<float[]> getSpamBinaryClassificationBuildingBlock(NeuralNetBinaryClassifier.Builder<float[]> builder);
 
     NeuralNetBinaryClassifier.Builder<float[]> getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.Builder<float[]> builder);
 
