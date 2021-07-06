@@ -54,7 +54,7 @@ public class ClassifierServiceTest {
                         .inputsNum(57)
                         .hiddenLayers(30, 15)
                         .maxError(0.03f)
-                        .maxEpochs(15000)
+                        .maxEpochs(100)
                         .learningRate(0.01f)
         ));
     }

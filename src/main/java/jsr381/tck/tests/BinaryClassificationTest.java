@@ -36,7 +36,7 @@ public class BinaryClassificationTest {
                 .inputsNum(57)
                 .hiddenLayers(30, 15)
                 .maxError(0.03f)
-                .maxEpochs(15000)
+                .maxEpochs(100)
                 .learningRate(0.01f))
                 .build();
         assertNotNull(classifier);
@@ -50,7 +50,7 @@ public class BinaryClassificationTest {
                 "inputsNum", 57,
                 "hiddenLayers", new int[]{30, 15},
                 "maxError", 0.03f,
-                "maxEpochs", 15000,
+                "maxEpochs", 100,
                 "learningRate", 0.01f
         );
         BinaryClassifier<float[]> classifier = config.getSpamBinaryClassificationBuilder(NeuralNetBinaryClassifier.builder().inputClass(float[].class))
@@ -81,7 +81,7 @@ public class BinaryClassificationTest {
                 .inputsNum(57)
                 .hiddenLayers(30, 15)
                 .maxError(0.03f)
-                .maxEpochs(15000)
+                .maxEpochs(100)
                 .learningRate(0.01f))
                 .build();
 
